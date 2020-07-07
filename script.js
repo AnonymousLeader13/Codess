@@ -97,7 +97,7 @@ function emptySquares() {
 }
 
 function bestSpot() {
-    //return emptySquares()[0];  //AI player will put its turn in the first empty square of the board
+    //AI player will put its turn in the best possible spot
     return minimax(origBoard, aiPlayer).index;
 }
 
@@ -199,6 +199,8 @@ function startGame_EASY() {
 function turnClick_EASY(square) {
 	if (typeof origBoard[square.target.id] == 'number') {
 		turn_EASY(square.target.id, huPlayer)
+		//human player plays his turn
+        //check if there is a tie. all squares are full
 		if (!checkTie_EASY()) turn_EASY(bestSpot_EASY(), aiPlayer);
 	}
 }
@@ -222,6 +224,7 @@ function gameOver_EASY(gameWon) {
 }
 
 function bestSpot_EASY() {
+	//AI player will put its turn in the first empty square of the board
 	return emptySquares()[0];
 }
 
