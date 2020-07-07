@@ -13,7 +13,8 @@ const winCombos = [    // specifies the winning cells
 ]
 
 const cells = document.querySelectorAll('.cell');
-startGame();
+// startGame();
+startGame_EASY();
 
 function startGame() {
     document.querySelector(".endgame").style.display = "none"; //sets the display of endgame back to none
@@ -180,4 +181,58 @@ chooses highest score of AI and lowest score for human player
     }
 
     return moves[bestMove];
+}
+
+
+//=========================== EASY =======================================
+
+function startGame_EASY() {
+	document.querySelector(".endgame").style.display = "none";
+	origBoard = Array.from(Array(9).keys());
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].innerText = '';
+		cells[i].style.removeProperty('background-color');
+		cells[i].addEventListener('click', turnClick_EASY, false);
+	}
+}
+
+function turnClick_EASY(square) {
+	if (typeof origBoard[square.target.id] == 'number') {
+		turn_EASY(square.target.id, huPlayer)
+		if (!checkTie_EASY()) turn_EASY(bestSpot_EASY(), aiPlayer);
+	}
+}
+
+function turn_EASY(squareId, player) {
+	origBoard[squareId] = player;
+	document.getElementById(squareId).innerText = player;
+	let gameWon = checkWin(origBoard, player)
+	if (gameWon) gameOver_EASY(gameWon)
+}
+
+function gameOver_EASY(gameWon) {
+	for (let index of winCombos[gameWon.index]) {
+		document.getElementById(index).style.backgroundColor =
+			gameWon.player == huPlayer ? "blue" : "red";
+	}
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].removeEventListener('click', turnClick_EASY, false);
+	}
+	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+}
+
+function bestSpot_EASY() {
+	return emptySquares()[0];
+}
+
+function checkTie_EASY() {
+	if (emptySquares().length == 0) {
+		for (var i = 0; i < cells.length; i++) {
+			cells[i].style.backgroundColor = "green";
+			cells[i].removeEventListener('click', turnClick_EASY, false);
+		}
+		declareWinner("Tie Game!")
+		return true;
+	}
+	return false;
 }
