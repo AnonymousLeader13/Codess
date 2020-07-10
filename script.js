@@ -1,241 +1,162 @@
-var origBoard; //initialize the board. Array keeping track of 'X' or 'O' or empty cell
+let mode = 'gravit'
+let board;
 const huPlayer = 'O';
 const aiPlayer = 'X';
-const winCombos = [    // specifies the winning cells
-    [0, 1, 2],    //top row win
-    [3, 4, 5],    //middle row win
-    [6, 7, 8],    //bottom row win
-    [0, 3, 6],    //left diagonal win
-    [1, 4, 7],     //right diaonal win
-    [2, 5, 8],      //middle col win
-    [0, 4, 8],      //left col win
-    [6, 4, 2]       //right col win
+let current;
+let availableSpots;
+let reset = false;
+const winCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2]
 ]
 
-const cells = document.querySelectorAll('.cell');
-// startGame();
-startGame_EASY();
-
 function startGame() {
-    document.querySelector(".endgame").style.display = "none"; //sets the display of endgame back to none
-    origBoard = Array.from(Array(9).keys());
-    for (var i = 0; i < cells.length; i++) {                   //removes 'X' and 'O' from the board
-        cells[i].innerText = '';
-        cells[i].style.removeProperty('background-color');
-        cells[i].addEventListener('click', turnClick, false);
+    console.log('hello')
+    board = [];
+    current = huPlayer;
+    availableSpots = [6, 7, 8];
+    document.querySelector(".endgame").style.display = "none";
+    for (let i = 0; i < 9; i++) {
+        board.push(document.getElementById(String(i)));
+        board[i].innerHTML = "";
+        board[i].classList.remove("color");
+        console.log('hi')
+        if (mode !== 'demo')
+            board[i].addEventListener('click', handleClick);
     }
 }
 
-function turnClick(square) {
-    /* if the type of cell/id just clicked is not a number. 
-    'O' or 'X' specifies played position.
-    number is replaced with 'O' or 'X' whenever a turn is played
-    */
-    if (typeof origBoard[square.target.id] == 'number') {
-        turn(square.target.id, huPlayer)  //human player plays his turn
-        /*check if there is a tie. all squares are full but no player has won
-        AI plays his turn if it is not a tie and human player has played
-         */
-        if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
+function fall(startId, endId, player, top) {
+    if (!top) {
+        top = 0;
+        board[startId].innerHTML = '<p class="falling">' + player + '</p>';
+    }
+    if (top < (endId - startId) * 100 / 3) {
+        const elem = document.querySelector(`#\\3${startId}  .falling`);
+        elem.style.top = top + 'px';
+
+        setTimeout(() => fall(startId, endId, player, top + 5), 20)
+    } else {
+        board[startId].innerHTML = ''
+        board[endId].innerHTML = player;
+        checkWin(player);
     }
 }
 
-function turn(squareId, player) {
-    origBoard[squareId] = player;
-    document.getElementById(squareId).innerText = player; //puts 'O' on the cell where human clicks
-    let gameWon = checkWin(origBoard, player)             //checks if the game has been won already. returns value to gameWon
-    if (gameWon) gameOver(gameWon)                        //gameWon stores index and player if the game is won and calls gameOver 
+function handleClickGravity(e) {
+    const cellId = Number(e.target.id);
+    const col = cellId % 3;
+    if (availableSpots[col] >= cellId) {
+        availableSpots[col] -= 3;
+        fall(cellId, availableSpots[col] + 3, current)
+        setLoading();
+        current = current === huPlayer ? aiPlayer : huPlayer;
+    }
 }
 
-function checkWin(board, player) {
-    /*finds all the cells in board played already and stores in plays. 
-    intialize accumulator to empty array,e is present board element,i is index.
-    if the element equals the player, we take the accumulator array, add the index to the array 
-    otherwise send it without changes
-    */
-    let plays = board.reduce((a, e, i) =>
-        (e === player) ? a.concat(i) : a, []);
-    let gameWon = null;
-    for (let [index, win] of winCombos.entries()) {  //iterating through all possibilities of a win
-        if (win.every(elem => plays.indexOf(elem) > -1)) {  //checks if the player has played in all the winning cells
-            gameWon = { index: index, player: player };      //sets the gameWon to which player has won and the index of win
-            break;
+function handleClickNormal(e) {
+    const cellId = Number(e.target.id);
+    if (board[cellId].innerHTML === "") {
+        board[cellId].innerHTML = current;
+        checkWin(current);
+        setLoading();
+        current = (current === huPlayer) ? aiPlayer : huPlayer;
+    }
+}
+
+function handleClick(e) {
+    console.log(mode)
+    mode === 'gravity' ? handleClickGravity(e) : handleClickNormal(e);
+}
+
+function setLoading(){
+    let p = Number(current === huPlayer);
+    document.querySelector(".player" + p).classList.remove("loading");
+    p = 1 - p;
+    document.querySelector(".player" + p).classList.add("loading");
+}
+function settingFalse() {
+    for (let i = 0; i < 9; i++)
+        board[i].removeEventListener('click', handleClick);
+}
+function checkWin(player, newBoard = board) {
+    // console.log(board.map(i => i.innerHTML)); 
+    for (let i = 0; i < 8; i++) {
+        let win = true;
+        for (let j = 0; j < 3; j++) {
+            if (newBoard[winCombos[i][j]].innerHTML !== player)
+                win = false;
+        }
+        if (win) {
+            settingFalse();
+            declareWinner(player + " Player Wins!");
+            for (let j = 0; j < 3; j++) {
+                newBoard[winCombos[i][j]].classList.add('color')
+            }
+            return;
         }
     }
-    return gameWon;
-}
-
-function gameOver(gameWon) {
-    /* highlight squares that are part of winning combination.
-    stops user from selecting more cells as game is over
-    */
-   /*iterates through each index of the win combo and sets the background colour of winning trio 
-   to blue if the human player wins and to red if he loses*/ 
-    for (let index of winCombos[gameWon.index]) {
-        document.getElementById(index).style.backgroundColor =
-            gameWon.player == huPlayer ? "blue" : "red";
+    if (checkTie()) {
+        settingFalse();
+        declareWinner('Tie Game!');
     }
-    /* no further cells can be clicked after game is over*/
-    for (var i = 0; i < cells.length; i++) {
-        cells[i].removeEventListener('click', turnClick, false);
-    }
-    /*declares the winner of the game*/ 
-    declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
 }
-
-//basic AI and winner box
-
+function checkTie() {
+    for (let i = 0; i < 9; i++) {
+        if (board[i].innerHTML === "")
+            return false;
+    }
+    return true;
+}
 function declareWinner(who) {
     document.querySelector(".endgame").style.display = "block";
     document.querySelector(".endgame .text").innerText = who;
 }
 
+function runDemo(player = aiPlayer) {
 
-function emptySquares() {
-    /*returns all the empty cells that is have a number instead of 'O' or 'X'*/
-    return origBoard.filter(s => typeof s == 'number');
-}
-
-function bestSpot() {
-    //AI player will put its turn in the best possible spot
-    return minimax(origBoard, aiPlayer).index;
-}
-
-function checkTie() {
-    /*if there are no empty squares and if no one has won
-    implies a tie */
-    if (emptySquares().length == 0) {
-        for (var i = 0; i < cells.length; i++) {
-            cells[i].style.backgroundColor = "green";
-            cells[i].removeEventListener('click', turnClick, false);
+    setTimeout(() => {
+        if(reset){
+            startGame();
+            reset = false;
         }
-        declareWinner("Tie Game!")   //declare a tie
-        return true;
-    }
-    return false;
-}
+        if (!checkWin((player === aiPlayer) ? huPlayer : aiPlayer) && !checkTie()) {
+            let ind = -1;
+            while(ind === -1 || board[ind].innerHTML !== "")
+                ind = Math.floor((Math.random() * 9));
 
-/* A Minimax algorithm is defined as a recursive function that does the following things:
-
-    return a value if a terminal state is found (+10, 0, -10)
-    go through available spots on the board
-    call the minimax function on each available spot (recursion)
-    evaluate returning values from function calls
-    and return the best value
-    */
-
-function minimax(newBoard, player) {
-    var availSpots = emptySquares();                 //returns all empty  cells
-
-    if (checkWin(newBoard, huPlayer)) {              //human player wins
-        return { score: -10 };
-    } else if (checkWin(newBoard, aiPlayer)) {       //AI player wins
-        return { score: 10 };
-    } else if (availSpots.length === 0) {            //tie game
-        return { score: 0 };
-    }
-    /*collect scores from each of empty spots to evaluate later */
-    var moves = [];                                  
-    for (var i = 0; i < availSpots.length; i++) {
-        var move = {};                               //stores the score after each move
-        move.index = newBoard[availSpots[i]];        //sets index number of the empty cell stored as number in original board to index property of move
-        newBoard[availSpots[i]] = player;            //sets empty spot on new board to current player
-                                                     //call minimax function to other player
-
-        if (player == aiPlayer) {                    
-            var result = minimax(newBoard, huPlayer);
-            move.score = result.score;
-        } else {
-            var result = minimax(newBoard, aiPlayer);
-            move.score = result.score;
-        }                                           
-        /*if the minimax function does not find a terminal state,it keeps recursively going deeper until 
-        it reaches state having better score
-        */
-
-        newBoard[availSpots[i]] = move.index;        //resets new board to previous state 
-
-        moves.push(move);                           //push move to move array
-    }
-    
-/*evaluation of best move from moves array
-chooses highest score of AI and lowest score for human player
-*/
-    var bestMove;
-    if (player === aiPlayer) {
-        var bestScore = -10000;
-        for (var i = 0; i < moves.length; i++) {
-            if (moves[i].score > bestScore) {
-                bestScore = moves[i].score;
-                bestMove = i;
+            if (board[ind].innerHTML === "") {
+                board[ind].innerHTML = player
             }
+            player = (player === aiPlayer) ? huPlayer : aiPlayer;
+            // console.log('Play end')
+
+            runDemo(player);
         }
-    } else {
-        var bestScore = 10000;
-        for (var i = 0; i < moves.length; i++) {
-            if (moves[i].score < bestScore) {
-                bestScore = moves[i].score;
-                bestMove = i;
-            }
+        else{
+            reset = true;
+            runDemo();
         }
-    }
-
-    return moves[bestMove];
+    }, 900)
 }
 
-
-//=========================== EASY =======================================
-
-function startGame_EASY() {
-	document.querySelector(".endgame").style.display = "none";
-	origBoard = Array.from(Array(9).keys());
-	for (var i = 0; i < cells.length; i++) {
-		cells[i].innerText = '';
-		cells[i].style.removeProperty('background-color');
-		cells[i].addEventListener('click', turnClick_EASY, false);
-	}
+function setMode(m) {
+    localStorage.setItem("pragya-mode", m);
+    window.location.href = 'ticTacToe.html'
 }
 
-function turnClick_EASY(square) {
-	if (typeof origBoard[square.target.id] == 'number') {
-		turn_EASY(square.target.id, huPlayer)
-		//human player plays his turn
-        //check if there is a tie. all squares are full
-		if (!checkTie_EASY()) turn_EASY(bestSpot_EASY(), aiPlayer);
-	}
-}
+mode = localStorage.getItem("pragya-mode") || 'demo';
 
-function turn_EASY(squareId, player) {
-	origBoard[squareId] = player;
-	document.getElementById(squareId).innerText = player;
-	let gameWon = checkWin(origBoard, player)
-	if (gameWon) gameOver_EASY(gameWon)
-}
+if(document.querySelector('.menu-grid')) mode = 'demo'
 
-function gameOver_EASY(gameWon) {
-	for (let index of winCombos[gameWon.index]) {
-		document.getElementById(index).style.backgroundColor =
-			gameWon.player == huPlayer ? "blue" : "red";
-	}
-	for (var i = 0; i < cells.length; i++) {
-		cells[i].removeEventListener('click', turnClick_EASY, false);
-	}
-	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
-}
+console.log(mode)
+document.querySelector('body').classList.add('mode-' + mode)
 
-function bestSpot_EASY() {
-	//AI player will put its turn in the first empty square of the board
-	return emptySquares()[0];
-}
-
-function checkTie_EASY() {
-	if (emptySquares().length == 0) {
-		for (var i = 0; i < cells.length; i++) {
-			cells[i].style.backgroundColor = "green";
-			cells[i].removeEventListener('click', turnClick_EASY, false);
-		}
-		declareWinner("Tie Game!")
-		return true;
-	}
-	return false;
-}
+    startGame();
+    if (mode === 'demo') runDemo();
