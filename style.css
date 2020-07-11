@@ -3,24 +3,43 @@
 	margin : 0;
 }
 
-h1{
-	font-family: 'Barriecito';
-	margin-top:1%;
-	color: #ffb3cc;
-	font-size: 39.5px;
+.menu{
+	border-radius: 12px;
+	padding: 15px 32px;
+	background-color: purple;
+	color: aliceblue;
+	right: 3%;
+	position: fixed;
+
 	
+}
+
+h1{
+	font-size: 340%;
+	margin-top:1%;
+	/* color: #d440d4; */
+	color:rgba(13, 13, 212, 0.699);
+	 /* font-style: italic; */
+	text-shadow:
+    -2px -2px 0 whitesmoke;
+    2px -2px 0 whitesmoke,
+    -2px 2px 0 whitesmoke,
+	2px 2px 0 whitesmoke; 
+	-webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: whitesmoke;
 }
 body{
 	font-family:'Lobster', cursive;
 }
 
 h3{
+	
 	color : cornsilk;
 	font-size: 30px;
 }
 button{
-	/* position: absolute;
-	top : 12%; */
+	/* position: absolute;*/
+	/* top : 12%;  */
 	text-align: center;
 	margin: 0 auto;
 	/* background-color: rosybrown; */
@@ -54,7 +73,7 @@ body{
 	background-image: url("./img/marsBG.jpg");
 }
 .container{
-	padding-top: 7.4%;
+	padding-top: 4.8%;
 }
 
 .earth{
