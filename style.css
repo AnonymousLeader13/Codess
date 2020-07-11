@@ -4,13 +4,17 @@
 }
 
 .menu{
-	border-radius: 12px;
-	padding: 15px 32px;
+	text-align: center;
+	margin: 0 auto;
 	background-color: purple;
-	color: aliceblue;
-	right: 3%;
-	position: fixed;
-
+	border:thin;
+	color:white;
+	padding: 15px 32px;
+	text-decoration: wavy;
+	display: inline-block;
+	font-size: 20px;
+	border-radius : 12px;
+    margin-top: 5px;
 	
 }
 
@@ -38,11 +42,8 @@ h3{
 	font-size: 30px;
 }
 button{
-	/* position: absolute;*/
-	/* top : 12%;  */
 	text-align: center;
 	margin: 0 auto;
-	/* background-color: rosybrown; */
 	background-color: lightblue;
 	border:thin;
 	color:blue;
