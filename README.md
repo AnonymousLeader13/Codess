@@ -11,6 +11,29 @@
 
 >The motivation behind creation of project is to upskill ourselves by learning AI concepts from Microsoft experts and contribute to the mission by applying these concepts in building a web based application.
 
+### *SCREENSHOTS*
+
+#### *MENU*
+
+
+### *TECH USED*
+
+Built with - 
+ * Electron
+
+### *FEATURES*
+
+The game can be played in following modes -
+ * Human player V/S Human player-
+     > On Mars ( Anti-Gravity)
+     > On Earth (Gravity)
+ * AI V/S Human player-
+     > Level Easy
+     > Level Medium
+     > Level Hard
+     
+ ### *API REFERENCE*
+
 ### *DEVELOPERS*
 
 1. Anahita Singla 
