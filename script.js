@@ -54,10 +54,9 @@ function handleClickGravity(e) {
         availableSpots[col] -= 3;
         fall(cellId, availableSpots[col] + 3, current)
         setLoading();
-        current = current === huPlayer ? aiPlayer : huPlayer;
+        current = (current === huPlayer) ? aiPlayer : huPlayer;
     }
 }
-
 function handleClickNormal(e) {
     const cellId = Number(e.target.id);
     if (board[cellId].innerHTML === "") {
@@ -68,12 +67,44 @@ function handleClickNormal(e) {
     }
 }
 
-function handleClick(e) {
-    console.log(mode)
-    mode === 'gravity' ? handleClickGravity(e) : handleClickNormal(e);
+function handleClickComet(e) {
+    const cellId = Number(e.target.id);
+    comet_caller();
+    console.log("C");
+    if (board[cellId].innerHTML === "") {
+        board[cellId].innerHTML = current;
+        checkWin(current);
+        setLoading();
+        current = (current === huPlayer) ? aiPlayer : huPlayer;
+    }
 }
 
-function setLoading(){
+function comet_caller() {
+    let call = Math.floor((Math.random() * 2));
+    if (call < 1) {
+        let ind = Math.floor((Math.random() * 9));
+        board[ind].innerHTML = "<img src=./img/fire.gif>"
+        setTimeout(() => {
+            board[ind].innerHTML = "";
+        }, 1000)
+    }
+}
+
+function handleClick(e) {
+    console.log("hi")
+    if (mode === 'anti-gravity') {
+        return handleClickNormal(e);
+    }
+    else if (mode === 'gravity') {
+        return handleClickGravity(e);
+    }
+    else if (mode === 'comet') {
+
+        return handleClickComet(e);
+    }
+}
+
+function setLoading() {
     let p = Number(current === huPlayer);
     document.querySelector(".player" + p).classList.remove("loading");
     p = 1 - p;
@@ -84,7 +115,6 @@ function settingFalse() {
         board[i].removeEventListener('click', handleClick);
 }
 function checkWin(player, newBoard = board) {
-    // console.log(board.map(i => i.innerHTML)); 
     for (let i = 0; i < 8; i++) {
         let win = true;
         for (let j = 0; j < 3; j++) {
@@ -97,7 +127,7 @@ function checkWin(player, newBoard = board) {
             for (let j = 0; j < 3; j++) {
                 newBoard[winCombos[i][j]].classList.add('color')
             }
-            return;
+            return true;
         }
     }
     if (checkTie()) {
@@ -120,13 +150,13 @@ function declareWinner(who) {
 function runDemo(player = aiPlayer) {
 
     setTimeout(() => {
-        if(reset){
+        if (reset) {
             startGame();
             reset = false;
         }
         if (!checkWin((player === aiPlayer) ? huPlayer : aiPlayer) && !checkTie()) {
             let ind = -1;
-            while(ind === -1 || board[ind].innerHTML !== "")
+            while (ind === -1 || board[ind].innerHTML !== "")
                 ind = Math.floor((Math.random() * 9));
 
             if (board[ind].innerHTML === "") {
@@ -137,14 +167,15 @@ function runDemo(player = aiPlayer) {
 
             runDemo(player);
         }
-        else{
+        else {
             reset = true;
             runDemo();
         }
-    }, 900)
+    }, 1200)
 }
 
 function setMode(m) {
+    console.log("setMode")
     localStorage.setItem("pragya-mode", m);
     window.location.href = 'ticTacToe.html'
 }
@@ -156,9 +187,9 @@ function setDifficulty(m) {
 
 mode = localStorage.getItem("pragya-mode") || 'demo';
 
-if(document.querySelector('.menu-grid')) mode = 'demo'
+if (document.querySelector('.menu-grid')) mode = 'demo'
 
 document.querySelector('body').classList.add('mode-' + mode)
 
-    startGame();
-    if (mode === 'demo') runDemo();
+startGame();
+if (mode === 'demo') runDemo();

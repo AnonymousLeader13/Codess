@@ -73,6 +73,9 @@ body{
 .mode-anti-gravity{
 	background-image: url("./img/marsBG.jpg");
 }
+.mode-comet{
+	background-image: url("./img/marsBG.jpg");
+}
 .container{
 	padding-top: 4.8%;
 }
