@@ -25,12 +25,12 @@ Built with -
 
 The game can be played in following modes -
  * Human player V/S Human player-
-     > On Mars ( Anti-Gravity)
-     > On Earth (Gravity)
+     > * On Mars ( Anti-Gravity)
+     > * On Earth (Gravity)
  * AI V/S Human player-
-     > Level Easy
-     > Level Medium
-     > Level Hard
+     > * Level Easy
+     > * Level Medium
+     > * Level Hard
      
  ### *API REFERENCE*
 
