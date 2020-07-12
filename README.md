@@ -13,8 +13,21 @@
 
 ### *SCREENSHOTS*
 
-#### *MENU*
+#### MENU
 
+<img src="img/front page.PNG" width=300 height=200>
+
+### Level Easy
+
+<img src="img/easy.PNG" width=300 height=200>
+
+### Level Medium 
+
+<img src="img/medium.PNG" width=300 height=200>
+
+### Level Hard
+
+<img src="img/hard.PNG" width=300 height=200>
 
 ### *TECH USED*
 
