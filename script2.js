@@ -97,7 +97,7 @@ function gameOver(gameWon) {
         cells[i].removeEventListener('click', turnClick, false);
     }
     /*declares the winner of the game*/
-    declareWinner(gameWon.player == huPlayer ? "COLONIZATION SUCCESSFUL!" : "ALIENS INVADED.");
+    declareWinner(gameWon.player == huPlayer ? "Colonization Successful!" : "Aliens invaded.");
 }
 
 //basic AI and winner box

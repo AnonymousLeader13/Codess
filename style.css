@@ -235,11 +235,11 @@ table tr td:last-child {
 
 .endgame {
   display: none;
-  width: 200px;
+  width: 360px;
   top: 30%;
   background-color: rgba(205,133,63, 0.8);
   position: absolute;
-  left: 50%;
+  left: 44%;
   margin-left: -100px;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -256,7 +256,7 @@ table tr td:last-child {
 .menu-grid{
 	transform: scale(0.75);
 	top: 50%;
-	left: 35%;
+	left: 38%;
 }
 
 
