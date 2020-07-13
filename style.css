@@ -29,8 +29,8 @@ h1{
     2px -2px 0 whitesmoke,
     -2px 2px 0 whitesmoke,
 	2px 2px 0 whitesmoke; 
-	-webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: whitesmoke;
+	-webkit-text-stroke-width : 2px;
+  -webkit-text-stroke-color : whitesmoke;
 }
 body{
 	font-family:'Lobster', cursive;
@@ -67,17 +67,33 @@ body{
 .mode-demo{
 	background-image: url("./img/FrontBG.jpg");
 }
+.mode-demo .dragon{
+	display: none;
+}
 .mode-gravity{
 	background-image: url("./img/earthBG.jpg");
+}
+.mode-anti-gravity .dragon{
+	display: none;
 }
 .mode-anti-gravity{
 	background-image: url("./img/marsBG.jpg");
 }
+.mode-gravity .dragon{
+	display: none;
+}
 .mode-comet{
 	background-image: url("./img/marsBG.jpg");
 }
+.dragon{
+	position: absolute;
+	transform: scale(0.5);
+	z-index: -1;
+	top : -5%;
+	left : 8%;
+}
 .container{
-	padding-top: 4.8%;
+	padding-top: 3.5%;
 }
 
 .earth{
@@ -85,18 +101,21 @@ body{
 	top : 57%;
 	left : 0;
 	transform: rotate(-30deg);	
+	z-index: -2;
 }
 
 .mars{
 	position: absolute;
 	top : 60%;
 	right: 10%;	
+	z-index: -2;
 }
 .rocket{
 	position: absolute;
 	top : 41%;
 	left : 3.25%; 
 	height: 30%;
+	z-index: -1;
 	animation-name: fly;
   animation-duration: 5s;
   animation-fill-mode: forwards;
@@ -115,7 +134,7 @@ body{
 
 .player{
 	position: absolute;
-	top: 35%;
+	top: 42%;
 	transform: translateX(-50%) scale(0.3);
 	animation: growing 3s;
 	animation-fill-mode: forwards;
@@ -264,7 +283,7 @@ table tr td:last-child {
 	}
 	
 	50%{
-		top: 10%;
+		top: 0%;
 	}
 
 	60%{

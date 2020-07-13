@@ -1,6 +1,6 @@
 var level;
 var origBoard; //initialize the board. Array keeping track of 'X' or 'O' or empty cell
-const huPlayer = 'O';
+const huPlayer = "O"; // <img src=./img/smoke.gif>
 const aiPlayer = 'X';
 const winCombos = [    // specifies the winning cells
     [0, 1, 2],    //top row win
@@ -36,7 +36,7 @@ function startGame() {
     document.querySelector(".endgame").style.display = "none"; //sets the display of endgame back to none
     origBoard = Array.from(Array(9).keys());
     for (var i = 0; i < cells.length; i++) {                   //removes 'X' and 'O' from the board
-        cells[i].innerText = '';
+        cells[i].innerHTML = '';
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click', turnClick, false);
     }
@@ -59,7 +59,7 @@ function turnClick(square) {
 
 function turn(squareId, player) {
     origBoard[squareId] = player;
-    document.getElementById(squareId).innerText = player; //puts 'O' on the cell where human clicks
+    document.getElementById(squareId).innerHTML = player; //puts 'O' on the cell where human clicks
     let gameWon = checkWin(origBoard, player)             //checks if the game has been won already. returns value to gameWon
     if (gameWon) gameOver(gameWon)                        //gameWon stores index and player if the game is won and calls gameOver 
 }
@@ -97,14 +97,14 @@ function gameOver(gameWon) {
         cells[i].removeEventListener('click', turnClick, false);
     }
     /*declares the winner of the game*/
-    declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+    declareWinner(gameWon.player == huPlayer ? "COLONIZATION SUCCESSFUL!" : "ALIENS INVADED.");
 }
 
 //basic AI and winner box
 
 function declareWinner(who) {
     document.querySelector(".endgame").style.display = "block";
-    document.querySelector(".endgame .text").innerText = who;
+    document.querySelector(".endgame .text").innerHTML = who;
 }
 
 
