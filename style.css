@@ -171,14 +171,20 @@ body{
 	left: 75%;
 }
 
+.player0.alien{
+	height: 10%;
+	top : 50%;
+	left: 27.7%; 
+}
+
 .player0.alien_med{
 	height: 40%;
 	/* top : 50%; */
 	left: 27.7%; 
 }
 .player0.alien_hard{
-	height: 40%;
-	top : 37%;
+	height: 70%;
+	top : 15%;
 	left: 27.7%; 
 }
 img{

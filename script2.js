@@ -1,7 +1,7 @@
 var level;
 var origBoard; //initialize the board. Array keeping track of 'X' or 'O' or empty cell
-const huPlayer = "<img src=./img/city__2.png>"; 
-const aiPlayer = "<img src=./img/dragon__4.png>";
+const huPlayer = "<img src=./img/knott.png>"; 
+const aiPlayer = "<img src=./img/cross.gif>"; //"<img src=./img/dragon__4.png>";
 const winCombos = [    // specifies the winning cells
     [0, 1, 2],    //top row win
     [3, 4, 5],    //middle row win

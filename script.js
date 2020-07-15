@@ -32,6 +32,7 @@ function startGame() {
 
 function fall(startId, endId, player, top) {
     if (!top) {
+        settingFalse();
         top = 0;
         board[startId].innerHTML = '<p class="falling">' + player + '</p>';
     }
@@ -41,6 +42,9 @@ function fall(startId, endId, player, top) {
 
         setTimeout(() => fall(startId, endId, player, top + 5), 20)
     } else {
+        for (let i = 0; i < 9; i++) {
+            board[i].addEventListener('click', handleClick);
+        }
         board[startId].innerHTML = ''
         board[endId].innerHTML = player;
         checkWin(player);
@@ -69,9 +73,9 @@ function handleClickNormal(e) {
 
 function handleClickComet(e) {
     const cellId = Number(e.target.id);
-    comet_caller();
-    console.log("C");
     if (board[cellId].innerHTML === "") {
+        comet_caller(e);
+        console.log("C");
         board[cellId].innerHTML = current;
         checkWin(current);
         setLoading();
@@ -79,7 +83,8 @@ function handleClickComet(e) {
     }
 }
 
-function comet_caller() {
+function comet_caller(e) {
+
     let call = Math.floor((Math.random() * 2));
     if (call < 1) {
         let ind = Math.floor((Math.random() * 9));
