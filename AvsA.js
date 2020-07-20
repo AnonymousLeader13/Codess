@@ -129,6 +129,84 @@ function handleClick(e) {
     }
 }
 
+var button_id = "10";
+onkeydown = function (e) {
+
+    // for menu page control ==============================
+    console.log("keyDown");
+    var enter_id = button_id - 1;
+    if (enter_id > "9")
+        document.getElementById(enter_id).style.border = "none";
+    if (event.keyCode === 39) {
+        if (button_id == "16")
+            button_id = "10";
+        document.getElementById(button_id).style.border = "thick solid #0000FF";
+        button_id++;
+    }
+    else if (event.keyCode === 13) {
+        if (enter_id > "9")
+            document.getElementById(enter_id).click();
+    }
+
+    // for deciding mode via keyboard =====================
+    if (mode === 'anti-gravity') {
+        return myKeyPressNormal(e);
+    }
+    else if (mode === 'gravity') {
+        return myKeyPressGravity(e);
+    }
+    else if (mode === 'comet') {
+        return myKeyPressDragon(e);
+    }
+};
+
+function myKeyPressNormal(e) {
+    var keynum;
+    var key = event.which || event.keyCode;
+    if ((key >= 49 && key <= 57) || (key >= 97 && key <= 105)) {
+        const ind = ((key - 97 < 0) ? (key - 49) : (key - 97));
+        if (board[ind].innerHTML === "") {
+            board[ind].innerHTML = current;
+            checkWin(current);
+            setLoading();
+            current = (current === huPlayer) ? aiPlayer : huPlayer;
+        }
+    }
+    console.log(key - 49);
+}
+function myKeyPressGravity(e) {
+    var keynum;
+    var key = event.which || event.keyCode;
+    if ((key >= 49 && key <= 57) || (key >= 97 && key <= 105)) {
+        const ind = ((key - 97 < 0) ? (key - 49) : (key - 97));
+        const col = ind % n;
+        // console.log(availableSpots[col] + " "+ key)
+        if (availableSpots[col] >= ind) {
+            availableSpots[col] -= n;
+            console.log(ind + " " + availableSpots[col] + n)
+            fall(ind, availableSpots[col] + n, current)
+            setLoading();
+            current = (current === huPlayer) ? aiPlayer : huPlayer;
+        }
+    }
+    console.log(key - 49);
+}
+function myKeyPressDragon(e) {
+    var keynum;
+    var key = event.which || event.keyCode;
+    if ((key >= 49 && key <= 57) || (key >= 97 && key <= 105)) {
+        const ind = ((key - 97 < 0) ? (key - 49) : (key - 97));
+        if (board[ind].innerHTML == "") {
+            board[ind].innerHTML = current;
+            checkWin(current);
+            setLoading();
+            comet_caller();
+            current = (current === huPlayer) ? aiPlayer : huPlayer;
+        }
+    }
+    console.log(key - 49);
+}
+
 //Responsible for showing "???" on the respective player's turn above the player's image
 function setLoading() {
     let p = Number(current === huPlayer);

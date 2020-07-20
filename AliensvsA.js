@@ -64,6 +64,20 @@ function turn(squareId, player) {
     if (gameWon) gameOver(gameWon)                        //gameWon stores index and player if the game is won and calls gameOver 
 }
 
+onkeydown = function (e) {
+    var keynum;
+    var key = event.which || event.keyCode;
+    if (key >= 49 && key <= 57) {
+        const ind = key - 49;
+        setLoading()
+        if (typeof origBoard[ind] == 'number') {
+            turn(ind, huPlayer)
+            if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(setLevel(level), aiPlayer);
+        }
+    }
+    console.log(key - 49);
+};
+
 function checkWin(board, player) {
     /*finds all the cells in board played already and stores in plays. 
     intialize accumulator to empty array,e is present board element,i is index.
