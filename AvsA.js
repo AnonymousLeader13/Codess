@@ -129,24 +129,49 @@ function handleClick(e) {
     }
 }
 
-var button_id = "10";
+var button_id_menu = "10";
+var button_id_internal = "20";
 onkeydown = function (e) {
-
-    // for menu page control ==============================
+ 
     console.log("keyDown");
-    var enter_id = button_id - 1;
-    if (enter_id > "9")
-        document.getElementById(enter_id).style.border = "none";
+    // removing border ================
+    var enter_id_menu = button_id_menu - 1;
+    var enter_id_internal = button_id_internal - 1;
+    if (document.URL.includes('menu.html') && enter_id_menu > "9")
+    document.getElementById(enter_id_menu).style.border = "none";
+    else if ((document.URL.includes('AvsA.html')) && enter_id_internal > "19")
+    document.getElementById(enter_id_internal).style.border = "none";
+    
+    
+    // for controlling buttons ==============================
+
     if (event.keyCode === 39) {
-        if (button_id == "16")
-            button_id = "10";
-        document.getElementById(button_id).style.border = "thick solid #0000FF";
-        button_id++;
+        if (document.URL.includes('menu.html')) {
+            console.log("menu")
+            if (button_id_menu == "16")
+                button_id_menu = "10";
+            document.getElementById(button_id_menu).style.border = "thick solid #0000FF";
+            button_id_menu++;
+        }
+
+        else if (document.URL.includes('AvsA.html')) {
+            console.log("AvsA")
+            if (button_id_internal == "22")
+                button_id_internal = "20";
+            console.log(button_id_internal)
+            document.getElementById(button_id_internal).style.border = "thick solid #0000FF";
+            button_id_internal++;
+        }
     }
+
     else if (event.keyCode === 13) {
-        if (enter_id > "9")
-            document.getElementById(enter_id).click();
+        if (document.URL.includes('menu.html') && enter_id_menu > "9")
+            document.getElementById(enter_id_menu).click();
+        else if (document.URL.includes('AvsA.html') && enter_id_internal > "19") {
+            document.getElementById(enter_id_internal).click();
+        }
     }
+
 
     // for deciding mode via keyboard =====================
     if (mode === 'anti-gravity') {
@@ -180,7 +205,7 @@ function myKeyPressGravity(e) {
     if ((key >= 49 && key <= 57) || (key >= 97 && key <= 105)) {
         const ind = ((key - 97 < 0) ? (key - 49) : (key - 97));
         const col = ind % 3;
-        console.log(availableSpots[col] + " "+ key + " " + current)
+        console.log(availableSpots[col] + " " + key + " " + current)
         if (availableSpots[col] >= ind) {
             availableSpots[col] -= 3;
             console.log(ind + " " + availableSpots[col] + 3)
@@ -283,7 +308,7 @@ function runDemo(player = aiPlayer) {
                 board[ind].innerHTML = player
             }
             player = (player === aiPlayer) ? huPlayer : aiPlayer;
-            
+
 
             runDemo(player);
         }

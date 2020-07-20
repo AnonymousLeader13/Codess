@@ -1,6 +1,6 @@
 var level;
 var origBoard; //initialize the board. Array keeping track of 'X' or 'O' or empty cell
-const huPlayer = "<img src=./img/knott.png>"; 
+const huPlayer = "<img src=./img/knott.png>";
 const aiPlayer = "<img src=./img/cross.gif>"; //"<img src=./img/dragon__4.png>";
 const winCombos = [    // specifies the winning cells
     [0, 1, 2],    //top row win
@@ -47,7 +47,7 @@ function turnClick(square) {
     'O' or 'X' specifies played position.
     number is replaced with 'O' or 'X' whenever a turn is played
     */
-   setLoading()
+    setLoading()
     if (typeof origBoard[square.target.id] == 'number') {
         turn(square.target.id, huPlayer)  //human player plays his turn
         /*check if there is a tie. all squares are full but no player has won
@@ -64,7 +64,34 @@ function turn(squareId, player) {
     if (gameWon) gameOver(gameWon)                        //gameWon stores index and player if the game is won and calls gameOver 
 }
 
+var button_id_internal = "20";
 onkeydown = function (e) {
+
+
+
+    var enter_id_internal = button_id_internal - 1;
+
+    if ((document.URL.includes('AlienvsA.html')) && enter_id_internal > "19")
+        document.getElementById(enter_id_internal).style.border = "none";
+    if (event.keyCode === 39) {
+        if (document.URL.includes('AlienvsA.html')) {
+            console.log("AvsA")
+            if (button_id_internal == "22")
+                button_id_internal = "20";
+            console.log(button_id_internal)
+            document.getElementById(button_id_internal).style.border = "thick solid #0000FF";
+            button_id_internal++;
+        }
+    }
+    else if (event.keyCode === 13) {
+        if (document.URL.includes('AlienvsA.html') && enter_id_internal > "19") {
+            document.getElementById(enter_id_internal).click();
+        }
+    }
+
+
+
+    // for playing game ========================
     var keynum;
     var key = event.which || event.keyCode;
     if (key >= 49 && key <= 57) {
@@ -156,7 +183,7 @@ function bestSpot_hard() {
 
 
 /* A Minimax algorithm is defined as a recursive function that does the following things:
-
+ 
     return a value if a terminal state is found (+10, 0, -10)
     go through available spots on the board
     call the minimax function on each available spot (recursion)
@@ -291,18 +318,18 @@ function minimax_level0(newBoard, player) {
 
 level = localStorage.getItem("AvsA-difficulty") || 'medium';
 
-if(level === 'easy'){
-    document.querySelector('.player0 img').src = "./img/alien.png" 
+if (level === 'easy') {
+    document.querySelector('.player0 img').src = "./img/alien.png"
 }
-else if(level === 'medium'){
+else if (level === 'medium') {
     // console.log(document.querySelector('.player0').classList)
-    document.querySelector('.player0 img').src = "./img/alien_med.png" 
+    document.querySelector('.player0 img').src = "./img/alien_med.png"
     document.querySelector('.player0').classList.add("alien_med");
 }
-else if(level === 'hard'){
+else if (level === 'hard') {
     console.log("Hard")
-    document.querySelector('.player0 img').src = "./img/alien_hard.png" 
+    document.querySelector('.player0 img').src = "./img/alien_hard.png"
     document.querySelector('.player0').classList.add("alien_hard");
 }
 
-    startGame();
+startGame();
