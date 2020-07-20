@@ -3,6 +3,7 @@
 	margin : 0;
 }
 
+
 .menu{
 	text-align: center;
 	margin: 0 auto;
@@ -16,6 +17,10 @@
 	border-radius : 12px;
     margin-top: 5px;
 	
+}
+
+.menu:hover{
+	border: thick solid whitesmoke;
 }
 
 h1{
@@ -55,6 +60,10 @@ button{
 
 }
 
+button:hover{
+	border: thick solid blue;
+}
+
 body{
 	height: 100vh;
 	background-position: center;
@@ -85,6 +94,8 @@ body{
 .mode-attack{
 	background-image: url("./img/marsBG.jpg");
 }
+
+
 .dragon{
 	position: absolute;
 	transform: scale(0.5);
@@ -154,7 +165,7 @@ body{
 	display:inline-block;
 	animation: loading 3s infinite;
 	color:whitesmoke;
-	font-size: 20px;
+	font-size: 28px;
 	overflow: hidden;
 	white-space:nowrap;
 	/* background-color: yellow; */
