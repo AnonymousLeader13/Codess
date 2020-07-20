@@ -155,7 +155,7 @@ onkeydown = function (e) {
     else if (mode === 'gravity') {
         return myKeyPressGravity(e);
     }
-    else if (mode === 'comet') {
+    else if (mode === 'attack') {
         return myKeyPressDragon(e);
     }
 };
@@ -179,12 +179,12 @@ function myKeyPressGravity(e) {
     var key = event.which || event.keyCode;
     if ((key >= 49 && key <= 57) || (key >= 97 && key <= 105)) {
         const ind = ((key - 97 < 0) ? (key - 49) : (key - 97));
-        const col = ind % n;
-        // console.log(availableSpots[col] + " "+ key)
+        const col = ind % 3;
+        console.log(availableSpots[col] + " "+ key + " " + current)
         if (availableSpots[col] >= ind) {
-            availableSpots[col] -= n;
-            console.log(ind + " " + availableSpots[col] + n)
-            fall(ind, availableSpots[col] + n, current)
+            availableSpots[col] -= 3;
+            console.log(ind + " " + availableSpots[col] + 3)
+            fall(ind, availableSpots[col] + 3, current)
             setLoading();
             current = (current === huPlayer) ? aiPlayer : huPlayer;
         }
@@ -200,7 +200,7 @@ function myKeyPressDragon(e) {
             board[ind].innerHTML = current;
             checkWin(current);
             setLoading();
-            comet_caller();
+            attack_caller();
             current = (current === huPlayer) ? aiPlayer : huPlayer;
         }
     }
