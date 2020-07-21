@@ -15,7 +15,7 @@
 
 #### MENU
 
-<img src="img/menu__.PNG" width=300 height=200>
+<img src="img/menu__.png" width=300 height=200>
 
 ### Level Easy
 
