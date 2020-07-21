@@ -15,7 +15,7 @@
 
 #### MENU
 
-<img src="img/menu.PNG" width=300 height=200>
+<img src="img/menu__.PNG" width=300 height=200>
 
 ### Level Easy
 
@@ -32,7 +32,9 @@
 ### *TECH USED*
 
 Built with - 
- * Electron
+ * Javascript
+ * CSS
+ * HTML
 
 ### *FEATURES*
 
@@ -40,13 +42,14 @@ The game can be played in following modes -
  * Human player V/S Human player-
      > * On Mars ( Anti-Gravity)
      > * On Earth (Gravity)
+     > * Attack ( Dragon attacks and burns a cell randomly making it empty)
  * AI V/S Human player-
      > * Level Easy
      > * Level Medium
      > * Level Hard
      
- ### *API REFERENCE*
-
+ ### *TECHNICAL DOCUMENTS*
+ 
 ### *DEVELOPERS*
 
 1. Anahita Singla 
