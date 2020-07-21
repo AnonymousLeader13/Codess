@@ -40,13 +40,13 @@ Built with -
 
 The game can be played in following modes -
  * Human player V/S Human player-
-     > * On Mars ( Anti-Gravity)
-     > * On Earth (Gravity)
-     > * Attack ( Dragon attacks and burns a cell randomly making it empty)
- * AI V/S Human player-
-     > * Level Easy
-     > * Level Medium
-     > * Level Hard
+     > * On Mars - No Gravity
+     > * On Earth - The O or X will fall to bottom most available cell in column due to Gravity
+     > * Attack - Dragon attacks and burns a cell randomly making it empty
+ * Computer V/S Human player-
+     > * Level Easy - Human player will never lose
+     > * Level Medium - Both stand chances of winning
+     > * Level Hard - AI player will never lose
      
  ### *TECHNICAL DOCUMENTS*
  
