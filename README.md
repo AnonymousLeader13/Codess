@@ -49,7 +49,7 @@ The game can be played in following modes -
      > * Level Hard
      
  ### *TECHNICAL DOCUMENTS*
-      [demo](https://www.youtube.com/watch?v=nhCh1pBsS80)
+      [demo](https://drive.google.com/file/d/1vGp-afOmr03fAeeXOp5M-FFKeO5N0Yzw/view?usp=sharing)
  
 ### *DEVELOPERS*
 
