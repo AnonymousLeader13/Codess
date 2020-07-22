@@ -15,11 +15,11 @@
 
 ### MENU
 
-<img src="img/menu_final_.PNG" width=300 height=200>
+<img src="img/menu_final_.PNG" width=300 height=190>
 
 ### Level Easy
 
-<img src="img/easy__.PNG" width=300 height=200>
+<img src="img/easy__.PNG" width=300 height=190>
 
 ### Level Medium 
 
@@ -35,11 +35,11 @@
 
 ### On Earth
 
-<img src="img/ONearth.PNG" width=300 height=200>
+<img src="img/ONearth.PNG" width=200 height=200>
 
 ### On Mars
 
-<img src="img/ONmars.PNG" width=300 height=200>
+<img src="img/ONmars.png" width=300 height=200>
 
 ### *TECH USED*
 
