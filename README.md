@@ -13,7 +13,7 @@
 
 ### *SCREENSHOTS*
 
-#### MENU
+### MENU
 
 <img src="img/menu_final_.PNG" width=300 height=200>
 
@@ -28,6 +28,18 @@
 ### Level Hard
 
 <img src="img/hard__.PNG" width=300 height=200>
+
+### +Dragon
+
+<img src="img/OnAttack.PNG" width=300 height=200>
+
+### On Earth
+
+<img src="img/ONearth.PNG" width=300 height=200>
+
+### On Mars
+
+<img src="img/ONmars.PNG" width=300 height=200>
 
 ### *TECH USED*
 
@@ -50,7 +62,7 @@ The game can be played in following modes -
      
  ### *TECHNICAL DOCUMENTS*
  
- https://drive.google.com/file/d/1YqT2KlUZ5XGefsC4XSFFfmNoOXQG-p23/view?usp=sharing
+ [click here to know more about the game](https://drive.google.com/file/d/1YqT2KlUZ5XGefsC4XSFFfmNoOXQG-p23/view?usp=sharing)
  
 ### *DEVELOPERS*
 
