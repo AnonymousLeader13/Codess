@@ -117,35 +117,37 @@ function attack_caller(e) {
 //handleClick in each mode handles the turn of next player
 function handleClick(e) {
     console.log("hi")
-    if (mode === 'anti-gravity') {
-        return handleClickNormal(e);
-    }
-    else if (mode === 'gravity') {
-        return handleClickGravity(e);
-    }
-    else if (mode === 'attack') {
+    if (document.URL.includes('AvsA.html')) {
+        if (mode === 'anti-gravity') {
+            return handleClickNormal(e);
+        }
+        else if (mode === 'gravity') {
+            return handleClickGravity(e);
+        }
+        else if (mode === 'attack') {
 
-        return handleClickattack(e);
+            return handleClickattack(e);
+        }
     }
 }
 
 var button_id_menu = "10";
 var button_id_internal = "20";
 onkeydown = function (e) {
- 
+
     console.log("keyDown");
     // removing border ================
     var enter_id_menu = button_id_menu - 1;
     var enter_id_internal = button_id_internal - 1;
     if (document.URL.includes('index.html') && enter_id_menu > "9")
-    document.getElementById(enter_id_menu).style.border = "none";
+        document.getElementById(enter_id_menu).style.border = "none";
     else if ((document.URL.includes('AvsA.html')) && enter_id_internal > "19")
-    document.getElementById(enter_id_internal).style.border = "none";
-    
-    
+        document.getElementById(enter_id_internal).style.border = "none";
+
+
     // for controlling buttons ==============================
 
-    if (event.keyCode === 39) {
+    if (event.keyCode === 39) { // right arraow key
         if (document.URL.includes('index.html')) {
             console.log("menu")
             if (button_id_menu == "16")
@@ -164,7 +166,7 @@ onkeydown = function (e) {
         }
     }
 
-    else if (event.keyCode === 13) {
+    else if (event.keyCode === 13) { // enter key
         if (document.URL.includes('index.html') && enter_id_menu > "9")
             document.getElementById(enter_id_menu).click();
         else if (document.URL.includes('AvsA.html') && enter_id_internal > "19") {
@@ -172,12 +174,15 @@ onkeydown = function (e) {
         }
     }
 
-    if(event.keyCode==72 && document.URL.includes('index.html'))
-        document.getElementById(help).click();
+    else if (event.keyCode === 72 ) // H key
+        if(document.URL.includes('index.html')){
+        console.log(document.getElementById(help))
+        document.getElementById("help").click();}
 
-    if(event.keyCode==27 && document.URL.includes('help.html')){
-        document.getElementById(21).style.border = "thick solid white";
-        document.getElementById(21).click();
+    if (event.keyCode === 27 && document.URL.includes('help.html')) { // esc key
+        console.log("Esc")
+        document.getElementById("21").style.border = "thick solid white";
+        document.getElementById("21").click();
     }
 
     // for deciding mode via keyboard =====================
@@ -346,5 +351,8 @@ if (document.querySelector('.menu-grid')) mode = 'demo'
 
 document.querySelector('body').classList.add('mode-' + mode)
 
+
+if (document.URL.includes('AlienvsA.html') || document.URL.includes('AvsA.html'))
 startGame();
+
 if (mode === 'demo') runDemo();
