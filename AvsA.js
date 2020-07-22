@@ -137,7 +137,7 @@ onkeydown = function (e) {
     // removing border ================
     var enter_id_menu = button_id_menu - 1;
     var enter_id_internal = button_id_internal - 1;
-    if (document.URL.includes('menu.html') && enter_id_menu > "9")
+    if (document.URL.includes('index.html') && enter_id_menu > "9")
     document.getElementById(enter_id_menu).style.border = "none";
     else if ((document.URL.includes('AvsA.html')) && enter_id_internal > "19")
     document.getElementById(enter_id_internal).style.border = "none";
@@ -146,7 +146,7 @@ onkeydown = function (e) {
     // for controlling buttons ==============================
 
     if (event.keyCode === 39) {
-        if (document.URL.includes('menu.html')) {
+        if (document.URL.includes('index.html')) {
             console.log("menu")
             if (button_id_menu == "16")
                 button_id_menu = "10";
@@ -165,13 +165,20 @@ onkeydown = function (e) {
     }
 
     else if (event.keyCode === 13) {
-        if (document.URL.includes('menu.html') && enter_id_menu > "9")
+        if (document.URL.includes('index.html') && enter_id_menu > "9")
             document.getElementById(enter_id_menu).click();
         else if (document.URL.includes('AvsA.html') && enter_id_internal > "19") {
             document.getElementById(enter_id_internal).click();
         }
     }
 
+    if(event.keyCode==72 && document.URL.includes('index.html'))
+        document.getElementById(help).click();
+
+    if(event.keyCode==27 && document.URL.includes('help.html')){
+        document.getElementById(21).style.border = "thick solid white";
+        document.getElementById(21).click();
+    }
 
     // for deciding mode via keyboard =====================
     if (mode === 'anti-gravity') {
