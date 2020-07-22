@@ -174,10 +174,11 @@ onkeydown = function (e) {
         }
     }
 
-    else if (event.keyCode === 72 ) // H key
-        if(document.URL.includes('index.html')){
-        console.log(document.getElementById(help))
-        document.getElementById("help").click();}
+    else if (event.keyCode === 72) // H key
+        if (document.URL.includes('index.html')) {
+            console.log(document.getElementById(help))
+            document.getElementById("help").click();
+        }
 
     if (event.keyCode === 27 && document.URL.includes('help.html')) { // esc key
         console.log("Esc")
@@ -352,7 +353,7 @@ if (document.querySelector('.menu-grid')) mode = 'demo'
 document.querySelector('body').classList.add('mode-' + mode)
 
 
-if (document.URL.includes('AlienvsA.html') || document.URL.includes('AvsA.html'))
-startGame();
-
-if (mode === 'demo') runDemo();
+if (!document.URL.includes('help.html')) {
+    startGame();
+    if (mode === 'demo') runDemo();
+}
