@@ -167,7 +167,7 @@ onkeydown = function (e) {
     }
 
     else if (event.keyCode === 13) { // enter key
-        if (document.URL.includes('index.html') && enter_id_menu > "9")
+        if (document.querySelector('.menu-grid') && enter_id_menu > "9")
             document.getElementById(enter_id_menu).click();
         else if (document.URL.includes('AvsA.html') && enter_id_internal > "19") {
             document.getElementById(enter_id_internal).click();
