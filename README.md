@@ -15,7 +15,7 @@
 
 #### MENU
 
-<img src="img/menu__.png" width=300 height=200>
+<img src="img/menu_final_.PNG" width=300 height=200>
 
 ### Level Easy
 
@@ -50,7 +50,7 @@ The game can be played in following modes -
      
  ### *TECHNICAL DOCUMENTS*
  
-      https://drive.google.com/file/d/1vGp-afOmr03fAeeXOp5M-FFKeO5N0Yzw/view?usp=sharing
+ https://drive.google.com/file/d/1YqT2KlUZ5XGefsC4XSFFfmNoOXQG-p23/view?usp=sharing
  
 ### *DEVELOPERS*
 
