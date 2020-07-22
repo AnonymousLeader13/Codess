@@ -139,7 +139,7 @@ onkeydown = function (e) {
     // removing border ================
     var enter_id_menu = button_id_menu - 1;
     var enter_id_internal = button_id_internal - 1;
-    if (document.URL.includes('index.html') && enter_id_menu > "9")
+    if (document.querySelector('.menu-grid') && enter_id_menu > "9")
         document.getElementById(enter_id_menu).style.border = "none";
     else if ((document.URL.includes('AvsA.html')) && enter_id_internal > "19")
         document.getElementById(enter_id_internal).style.border = "none";
@@ -148,7 +148,7 @@ onkeydown = function (e) {
     // for controlling buttons ==============================
 
     if (event.keyCode === 39) { // right arraow key
-        if (document.URL.includes('index.html')) {
+        if (document.querySelector('.menu-grid')) {
             console.log("menu")
             if (button_id_menu == "16")
                 button_id_menu = "10";
@@ -175,7 +175,7 @@ onkeydown = function (e) {
     }
 
     else if (event.keyCode === 72) // H key
-        if (document.URL.includes('index.html')) {
+    if (document.querySelector('.menu-grid')) {
             console.log(document.getElementById(help))
             document.getElementById("help").click();
         }
