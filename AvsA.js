@@ -181,7 +181,7 @@ onkeydown = function (e) {
         }
 
     if (event.keyCode === 27 && document.URL.includes('help.html')) { // esc key
-        console.log("Esc")
+        console.log(document.getElementById("21"))
         document.getElementById("21").style.border = "thick solid white";
         document.getElementById("21").click();
     }
