@@ -180,11 +180,11 @@ onkeydown = function (e) {
             document.getElementById("help").click();
         }
 
-    if (event.keyCode === 27 && document.URL.includes('help.html')) { // esc key
-        console.log(document.getElementById("21"))
-        document.getElementById("21").style.border = "thick solid white";
-        document.getElementById("21").click();
-    }
+    // if (event.keyCode === 27 && document.URL.includes('help.html')) { // esc key
+    //     console.log(document.getElementById("21"))
+    //     document.getElementById("21").style.border = "thick solid white";
+    //     document.getElementById("21").click();
+    // }
 
     // for deciding mode via keyboard =====================
     if (mode === 'anti-gravity') {
